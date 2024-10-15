@@ -61,11 +61,14 @@ func on_timeout():
 	if wall_collision == null: 
 		move_to_position(new_head_position)
 	else: 
+		timer.stop()
 		on_game_over.emit()
 	
 	# food collision
 	if new_head_position == food_spawner.food_position: 
 		points += 1
+		if points > 0 and points % 10 == 0: 
+			increase_speed()
 		on_point_scored.emit(points)
 		food_spawner.destroy_food()
 		food_spawner.spawn_food()
@@ -126,3 +129,9 @@ func check_snake_collision(new_position: Vector2):
 	if body_parts_without_head.filter(func (part): return part.position == new_position):
 		return true
 	return false
+
+
+func increase_speed():
+	if timer.wait_time >= 0.04:
+		timer.wait_time -= 0.02
+	print("new speed: ", timer.wait_time)
