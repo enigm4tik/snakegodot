@@ -61,9 +61,7 @@ func on_timeout():
 	if wall_collision == null: 
 		move_to_position(new_head_position)
 	else: 
-		var position_after_wall_collision = get_position_after_wall_collision(wall_collision, new_head_position)
-		new_head_position = position_after_wall_collision
-		move_to_position(position_after_wall_collision)
+		on_game_over.emit()
 	
 	# food collision
 	if new_head_position == food_spawner.food_position: 
