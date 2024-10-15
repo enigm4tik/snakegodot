@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkerudwwslvqd"]
+
+[ext_resource type="PackedScene" uid="uid://jqvy4npb0dwp" path="res://Scenes/snake.tscn" id="1_kk1p4"]
+[ext_resource type="Texture2D" uid="uid://derctmbs8d5p" path="res://Assets/wall.png" id="2_f0mgv"]
+[ext_resource type="Script" path="res://Scripts/walls.gd" id="2_mjr42"]
+[ext_resource type="PackedScene" uid="uid://cnpgweo4gl4dy" path="res://Scenes/food_spawner.tscn" id="4_k4cvt"]
+[ext_resource type="PackedScene" uid="uid://cnhlufej1i7bb" path="res://Scenes/food.tscn" id="5_75m0x"]
+[ext_resource type="PackedScene" uid="uid://ddmmkxhmb2y1q" path="res://Scenes/ui_layer.tscn" id="6_60mwg"]
+[ext_resource type="Script" path="res://Scripts/ui_layer.gd" id="7_no3ds"]
+
+[node name="Game" type="Node2D"]
+
+[node name="Snake" parent="." node_paths=PackedStringArray("walls") instance=ExtResource("1_kk1p4")]
+walls = NodePath("../Walls")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+
+[node name="Walls" type="Node" parent="."]
+script = ExtResource("2_mjr42")
+
+[node name="BottomWall" type="Sprite2D" parent="Walls" groups=["Walls"]]
+position = Vector2(0, 480)
+scale = Vector2(57, 1)
+texture = ExtResource("2_f0mgv")
+
+[node name="TopWall" type="Sprite2D" parent="Walls" groups=["Walls"]]
+position = Vector2(0, -480)
+scale = Vector2(57, 1)
+texture = ExtResource("2_f0mgv")
+
+[node name="RightWall" type="Sprite2D" parent="Walls" groups=["Walls"]]
+position = Vector2(896, 0)
+rotation = 1.5708
+scale = Vector2(30, 1)
+texture = ExtResource("2_f0mgv")
+
+[node name="LeftWall" type="Sprite2D" parent="Walls" groups=["Walls"]]
+position = Vector2(-896, 0)
+rotation = -1.5708
+scale = Vector2(30, 1)
+texture = ExtResource("2_f0mgv")
+
+[node name="FoodSpawner" parent="." node_paths=PackedStringArray("walls", "snake") instance=ExtResource("4_k4cvt")]
+walls = NodePath("../Walls")
+food_scene = ExtResource("5_75m0x")
+snake = NodePath("../Snake")
+
+[node name="UILayer" parent="." instance=ExtResource("6_60mwg")]
+script = ExtResource("7_no3ds")

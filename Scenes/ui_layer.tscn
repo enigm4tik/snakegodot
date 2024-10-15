@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://ddmmkxhmb2y1q"]
+
+[node name="UILayer" type="CanvasLayer"]
+
+[node name="BoxContainer" type="HBoxContainer" parent="."]
+visible = false
+custom_minimum_size = Vector2(400, 0)
+offset_left = 367.0
+offset_top = 337.0
+offset_right = 767.0
+offset_bottom = 377.0
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="Restart" type="Button" parent="BoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Restart"
+
+[node name="Quit" type="Button" parent="BoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Quit"
+
+[node name="PointsLabel" type="Label" parent="."]
+offset_left = 1022.0
+offset_top = 20.0
+offset_right = 1089.0
+offset_bottom = 43.0
+text = "Points: 0"
+
+[node name="GameOverLabel" type="Label" parent="."]
+visible = false
+offset_left = 290.0
+offset_top = 164.0
+offset_right = 833.0
+offset_bottom = 301.0
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+
+[connection signal="pressed" from="BoxContainer/Quit" to="GameOverLabel" method="_on_quit_pressed"]
